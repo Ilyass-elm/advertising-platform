@@ -21,7 +21,7 @@ unzip -o /opt/${zip_file} -d /opt/app
 cd /opt/app/${component}
 docker build -t ${image_name} .
 
-docker run -d --name ${container_name} -p ${host_port}:${container_port} --restart unless-stopped ${image_name}
+docker run -d --name ${container_name} -p ${host_port}:${container_port} -e BACKEND_IP_ADDRESS=${backend_ip_address} -e S3_BUCKET_NAME=${s3_bucket_name} --restart unless-stopped ${image_name}
 DEPLOY_EOF
 chmod +x /opt/deploy.sh
 
